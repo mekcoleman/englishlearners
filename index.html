@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gap for English Learners in Illinois Schools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #162b75;
+            --accent-teal: #0d7377;
+            --light-bg: #f8f9fc;
+            --white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+        }
+
+        body {
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8f9fc 0%, #e8eaf6 100%);
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .container {
+            all: initial;
+            font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(22, 43, 117, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .outperformers-section {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .outperformers-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            padding: 0.5rem 0;
+        }
+
+        .outperformers-header:hover {
+            opacity: 0.8;
+        }
+
+        .outperformers-text {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .outperformers-text strong {
+            font-weight: 700;
+        }
+
+        .expand-icon {
+            font-size: 1rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        .outperformers-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .outperformers-content.expanded {
+            max-height: 2000px;
+            margin-top: 1rem;
+            padding: 1.25rem;
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+        }
+
+        .outperformers-subject {
+            margin-bottom: 1.5rem;
+        }
+
+        .outperformers-subject:last-child {
+            margin-bottom: 0;
+        }
+
+        .outperformers-subject-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 0.5rem;
+        }
+
+        .outperformers-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .outperformers-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #d1fae5;
+            font-size: 0.85rem;
+            color: #047857;
+        }
+
+        .outperformers-item:last-child {
+            border-bottom: none;
+        }
+
+        .outperformers-item-name {
+            font-weight: 600;
+        }
+
+        .outperformers-item-stats {
+            font-size: 0.8rem;
+            color: #059669;
+            margin-top: 0.125rem;
+        }
+
+        .search-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.95rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(22, 43, 117, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .results-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin-top: -2px;
+        }
+
+        .results-dropdown.show {
+            display: block;
+        }
+
+        .result-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item:hover {
+            background: var(--light-bg);
+        }
+
+        .result-item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .result-item-location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.125rem;
+        }
+
+        .current-display {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1e3a8a 100%);
+            color: var(--white);
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .current-display-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.9;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .current-display-name {
+            font-family: 'Fraunces', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .demographics-section {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demographics-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-blue);
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .demographics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .demographic-item {
+            text-align: center;
+            padding: 0.625rem;
+            background: var(--white);
+            border-radius: 8px;
+        }
+
+        .demographic-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .demographic-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .demographic-value.redacted {
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .grade-selector-wrapper {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .grade-selector-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .grade-selector {
+            display: inline-flex;
+            gap: 0.5rem;
+            background: var(--light-bg);
+            padding: 0.375rem;
+            border-radius: 10px;
+        }
+
+        .grade-button {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Lexend', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .grade-button:hover {
+            background: var(--white);
+        }
+
+        .grade-button.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 24px rgba(22, 43, 117, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-title {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .comparison-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .bar-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .bar-container {
+            position: relative;
+            height: 40px;
+            background: var(--light-bg);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-teal) 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.875rem;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: width 1s ease-out;
+        }
+
+        .bar-fill.overall {
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+        }
+
+        .bar-fill.el {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .gap-indicator {
+            margin-top: 0.5rem;
+            padding: 0.625rem;
+            background: var(--light-bg);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .gap-label {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .gap-value {
+            font-weight: 700;
+            color: #dc2626;
+            margin-left: 0.25rem;
+        }
+
+        .gap-value.surplus {
+            color: var(--primary-blue);
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding: 0.875rem;
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .legend-color.overall {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .legend-color.el {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .legend-text {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .note {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #fef3c7;
+            border-left: 4px solid var(--warning-orange);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #78350f;
+            line-height: 1.6;
+        }
+
+        .note strong {
+            font-weight: 700;
+        }
+
+        .redacted {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+                border-radius: 0;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .legend {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The Gap for English Learners in Illinois Schools</h1>
+            <p class="subtitle">2025 Illinois State Report Card data for Illinois students compared to English learners.</p>
+        </div>
+
+        <div class="outperformers-section">
+            <div class="outperformers-header" id="outperformersHeader">
+                <div class="outperformers-text">
+                    <strong>About 97% of schools</strong> statewide show a proficiency gap where overall students outperform English learners. Exceptions last year included <strong>16 schools</strong> where English learners outperform in English language arts, <strong>49 schools</strong> in math, and one in science. Click to see the full list of these schools.
+                </div>
+                <div class="expand-icon" id="expandIcon">▼</div>
+            </div>
+            <div class="outperformers-content" id="outperformersContent">
+                <div class="outperformers-subject">
+                    <div class="outperformers-subject-title">English Language Arts (16 schools)</div>
+                    <ul class="outperformers-list" id="elaList"></ul>
+                </div>
+                <div class="outperformers-subject">
+                    <div class="outperformers-subject-title">Math (49 schools)</div>
+                    <ul class="outperformers-list" id="mathList"></ul>
+                </div>
+                <div class="outperformers-subject">
+                    <div class="outperformers-subject-title">Science (1 school)</div>
+                    <ul class="outperformers-list" id="scienceList"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <label class="search-label">Search for a school or district:</label>
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Type to search schools and districts..."
+                    autocomplete="off"
+                >
+                <div class="results-dropdown" id="resultsDropdown"></div>
+            </div>
+        </div>
+
+        <div class="current-display" id="currentDisplay">
+            <div class="current-display-label">Currently Showing</div>
+            <div class="current-display-name">Statewide</div>
+        </div>
+
+        <div class="demographics-section" id="demographicsSection">
+            <div class="demographics-title">Student Demographics</div>
+            <div class="demographics-grid" id="demographicsGrid">
+                <!-- Demographics will be inserted here -->
+            </div>
+        </div>
+
+        <div class="grade-selector-wrapper">
+            <label class="grade-selector-label">Grade Level:</label>
+            <div class="grade-selector">
+                <button class="grade-button active" data-grade="all">All Grades</button>
+                <button class="grade-button" data-grade="grades-3-8">Grades 3-8</button>
+                <button class="grade-button" data-grade="high-school">High School</button>
+            </div>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be inserted here -->
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color overall"></div>
+                <span class="legend-text">Overall Students</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color el"></div>
+                <span class="legend-text">English Learners</span>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> An asterisk (*) indicates data has been redacted for privacy purposes. When a subgroup is too small to report (fewer than 10 students), any other subgroup whose publication would allow someone to calculate the suppressed value is also withheld. The Illinois Assessment of Readiness (IAR) measures proficiency for grades 3-8. The Illinois Science Assessment (ISA) is an annual test showing student proficiency in science.
+        </div>
+    </div>
+
+    <script>
+        let educationData = [];
+        let currentData = null;
+        let currentGrade = 'all';
+
+        // Load the data from external JSON file
+        async function loadData() {
+            try {
+                const response = await fetch('education_data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load data file');
+                }
+                educationData = await response.json();
+                
+                // Set initial display to statewide
+                currentData = educationData.find(item => item.Level === 'Statewide');
+                displayStats(currentData);
+                displayDemographics(currentData);
+                populateOutperformers();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('statsGrid').innerHTML = '<div style="padding: 2rem; text-align: center; color: red;"><strong>Error loading data.</strong><br>Please ensure education_data.json is uploaded to the same directory as this HTML file.</div>';
+            }
+        }
+
+        function formatNumber(value) {
+            if (value === '' || value === null || value === undefined) {
+                return null;
+            }
+            if (value === '*') {
+                return '*';
+            }
+            
+            const num = parseFloat(value);
+            if (isNaN(num)) {
+                return value;
+            }
+            
+            if (num >= 1000) {
+                return num.toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 1
+                });
+            }
+            
+            return num.toFixed(1);
+        }
+
+        function displayDemographics(data) {
+            const demographicsGrid = document.getElementById('demographicsGrid');
+            
+            const totalEnrollment = data['# Student Enrollment'];
+            const elEnrollment = data['# Student Enrollment - EL'];
+            const elPercent = data['% Student Enrollment - EL'];
+            const chronicAbsenteeism = data['Chronic Absenteeism'];
+            const chronicAbsenteeismEL = data['Chronic Absenteeism - EL'];
+            const graduationRate = data['High School 5-Year Graduation Rate - Total'];
+            const graduationRateEL = data['High School 5-Year Graduation Rate - EL'];
+            const kindergartenReadiness = data['Percent of Kindergartners Demonstrating Readiness in All Three Developmental Areas - Total'];
+            const kindergartenReadinessEL = data['Percent of Kindergartners Demonstrating Readiness in All Three Developmental Areas - EL'];
+            
+            let demographicsHTML = '';
+            
+            // Total Enrollment
+            if (totalEnrollment === '*' || totalEnrollment === '' || totalEnrollment === null) {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Total Enrollment</div>
+                        <div class="demographic-value redacted">Data redacted</div>
+                    </div>
+                `;
+            } else {
+                const totalNum = parseFloat(totalEnrollment);
+                const totalFormatted = isNaN(totalNum) ? totalEnrollment : totalNum.toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Total Enrollment</div>
+                        <div class="demographic-value">${totalFormatted}</div>
+                    </div>
+                `;
+            }
+            
+            // EL Students
+            if (elEnrollment === '*' || elEnrollment === '' || elEnrollment === null) {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">English Learner Students</div>
+                        <div class="demographic-value redacted">Data redacted</div>
+                    </div>
+                `;
+            } else {
+                const elNum = parseFloat(elEnrollment);
+                const elFormatted = isNaN(elNum) ? elEnrollment : elNum.toLocaleString('en-US', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">English Learner Students</div>
+                        <div class="demographic-value">${elFormatted}</div>
+                    </div>
+                `;
+            }
+            
+            // EL Percent
+            if (elPercent === '*' || elPercent === '' || elPercent === null) {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">English Learner Percentage</div>
+                        <div class="demographic-value redacted">Data redacted</div>
+                    </div>
+                `;
+            } else {
+                const percentNum = parseFloat(elPercent);
+                const percentFormatted = isNaN(percentNum) ? elPercent : percentNum.toLocaleString('en-US', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 1
+                });
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">English Learner Percentage</div>
+                        <div class="demographic-value">${percentFormatted}%</div>
+                    </div>
+                `;
+            }
+            
+            // Chronic Absenteeism
+            if (chronicAbsenteeism !== '' && chronicAbsenteeism !== null && chronicAbsenteeism !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Chronic Absenteeism (Overall)</div>
+                        <div class="demographic-value">${formatNumber(chronicAbsenteeism)}%</div>
+                    </div>
+                `;
+            }
+            
+            if (chronicAbsenteeismEL !== '' && chronicAbsenteeismEL !== null && chronicAbsenteeismEL !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Chronic Absenteeism (EL)</div>
+                        <div class="demographic-value">${formatNumber(chronicAbsenteeismEL)}%</div>
+                    </div>
+                `;
+            }
+            
+            // Graduation Rate (for high school/unit districts)
+            if (graduationRate !== '' && graduationRate !== null && graduationRate !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">5-Year Graduation Rate (Overall)</div>
+                        <div class="demographic-value">${formatNumber(graduationRate)}%</div>
+                    </div>
+                `;
+            }
+            
+            if (graduationRateEL !== '' && graduationRateEL !== null && graduationRateEL !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">5-Year Graduation Rate (EL)</div>
+                        <div class="demographic-value">${formatNumber(graduationRateEL)}%</div>
+                    </div>
+                `;
+            }
+            
+            // Kindergarten Readiness (for elementary/unit districts)
+            if (kindergartenReadiness !== '' && kindergartenReadiness !== null && kindergartenReadiness !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Kindergarten Readiness (Overall)</div>
+                        <div class="demographic-value">${formatNumber(kindergartenReadiness)}%</div>
+                    </div>
+                `;
+            }
+            
+            if (kindergartenReadinessEL !== '' && kindergartenReadinessEL !== null && kindergartenReadinessEL !== '*') {
+                demographicsHTML += `
+                    <div class="demographic-item">
+                        <div class="demographic-label">Kindergarten Readiness (EL)</div>
+                        <div class="demographic-value">${formatNumber(kindergartenReadinessEL)}%</div>
+                    </div>
+                `;
+            }
+            
+            demographicsGrid.innerHTML = demographicsHTML;
+        }
+
+        function displayStats(data) {
+            const statsGrid = document.getElementById('statsGrid');
+            const currentDisplay = document.getElementById('currentDisplay');
+            
+            // Update current display
+            let displayName = 'Statewide';
+            if (data.Level === 'School' && data['School Name']) {
+                displayName = `${data['School Name']}`;
+                if (data.District) {
+                    displayName += ` (${data.District})`;
+                }
+            } else if (data.Level === 'District' && data.District) {
+                displayName = data.District;
+            }
+            
+            currentDisplay.innerHTML = `
+                <div class="current-display-label">Currently Showing</div>
+                <div class="current-display-name">${displayName}</div>
+            `;
+            
+            // Update demographics
+            displayDemographics(data);
+            
+            // Create stats cards
+            const subjects = [
+                {
+                    title: 'English Language Arts',
+                    id: 'ela',
+                    overall: {
+                        'all': data['% ELA Proficiency'],
+                        'grades-3-8': data['% ELA Proficiency Grade 3 to 8'],
+                        'high-school': data['% ELA Proficiency High School']
+                    },
+                    el: {
+                        'all': data['% ELA Proficiency - EL'],
+                        'grades-3-8': data['% ELA Proficiency Grade 3 to 8 - EL'],
+                        'high-school': data['% ELA Proficiency High School - EL']
+                    }
+                },
+                {
+                    title: 'Math',
+                    id: 'math',
+                    overall: {
+                        'all': data['% Math Proficiency'],
+                        'grades-3-8': data['% Math Proficiency Grade 3 to 8'],
+                        'high-school': data['% Math Proficiency High School']
+                    },
+                    el: {
+                        'all': data['% Math Proficiency - EL'],
+                        'grades-3-8': data['% Math Proficiency Grade 3 to 8 - EL'],
+                        'high-school': data['% Math Proficiency High School - EL']
+                    }
+                },
+                {
+                    title: 'Science',
+                    id: 'science',
+                    overall: {
+                        'all': data['% Science Proficiency'],
+                        'grades-3-8': data['% Science Proficiency Grade 3 to 8'],
+                        'high-school': data['% Science Proficiency High School']
+                    },
+                    el: {
+                        'all': data['% Science Proficiency - EL'],
+                        'grades-3-8': data['% Science Proficiency Grade 3 to 8 - EL'],
+                        'high-school': data['% Science Proficiency High School - EL']
+                    }
+                }
+            ];
+            
+            statsGrid.innerHTML = subjects.map(subject => {
+                return `
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <h3 class="stat-title">${subject.title}</h3>
+                        </div>
+                        <div class="comparison-bars" id="${subject.id}-bars">
+                            ${generateBars(subject.overall[currentGrade], subject.el[currentGrade])}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function generateBars(overallValue, elValue) {
+            const overallFormatted = formatNumber(overallValue);
+            const elFormatted = formatNumber(elValue);
+            
+            let overallBar = '';
+            let elBar = '';
+            let gapIndicator = '';
+            
+            if (overallFormatted === '*' || elFormatted === '*' || overallFormatted === null || elFormatted === null) {
+                const redactedText = (overallFormatted === '*' || elFormatted === '*') 
+                    ? '<span class="redacted">Data redacted for privacy</span>' 
+                    : '<span class="redacted">No data available</span>';
+                
+                overallBar = `
+                    <div class="bar-group">
+                        <div class="bar-label">Overall Students</div>
+                        <div class="bar-container">
+                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;">${redactedText}</div>
+                        </div>
+                    </div>
+                `;
+                elBar = `
+                    <div class="bar-group">
+                        <div class="bar-label">English Learners</div>
+                        <div class="bar-container">
+                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;">${redactedText}</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const overallNum = parseFloat(overallValue);
+                const elNum = parseFloat(elValue);
+                const gap = overallNum - elNum;
+                const gapClass = gap < 0 ? 'surplus' : '';
+                const gapLabel = gap < 0 ? 'Proficiency Surplus:' : 'Proficiency Gap:';
+                const displayGap = Math.abs(gap);
+                
+                overallBar = `
+                    <div class="bar-group">
+                        <div class="bar-label">Overall Students</div>
+                        <div class="bar-container">
+                            <div class="bar-fill overall" style="width: ${overallNum}%">
+                                ${overallFormatted}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                elBar = `
+                    <div class="bar-group">
+                        <div class="bar-label">English Learners</div>
+                        <div class="bar-container">
+                            <div class="bar-fill el" style="width: ${elNum}%">
+                                ${elFormatted}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                gapIndicator = `
+                    <div class="gap-indicator">
+                        <span class="gap-label">${gapLabel}</span>
+                        <span class="gap-value ${gapClass}">${formatNumber(displayGap)} percentage points</span>
+                    </div>
+                `;
+            }
+            
+            return overallBar + elBar + gapIndicator;
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const resultsDropdown = document.getElementById('resultsDropdown');
+
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                resultsDropdown.classList.remove('show');
+                return;
+            }
+            
+            const results = educationData.filter(item => {
+                if (item.Level === 'Statewide') return false;
+                
+                const searchName = item.SearchName.toLowerCase();
+                const district = (item.District || '').toLowerCase();
+                const city = (item.City || '').toLowerCase();
+                
+                return searchName.includes(query) || 
+                       district.includes(query) || 
+                       city.includes(query);
+            }).slice(0, 50);
+            
+            if (results.length > 0) {
+                resultsDropdown.innerHTML = results.map(item => {
+                    let name = item.SearchName;
+                    let location = item.City ? `${item.City}` : '';
+                    
+                    return `
+                        <div class="result-item" data-index="${educationData.indexOf(item)}">
+                            <span class="result-item-name">${name}</span>
+                            ${location ? `<span class="result-item-location">${location}</span>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                resultsDropdown.classList.add('show');
+            } else {
+                resultsDropdown.innerHTML = '<div class="result-item">No results found</div>';
+                resultsDropdown.classList.add('show');
+            }
+        });
+
+        resultsDropdown.addEventListener('click', function(e) {
+            const resultItem = e.target.closest('.result-item');
+            if (resultItem && resultItem.dataset.index) {
+                const index = parseInt(resultItem.dataset.index);
+                currentData = educationData[index];
+                displayStats(currentData);
+                searchInput.value = '';
+                resultsDropdown.classList.remove('show');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-wrapper')) {
+                resultsDropdown.classList.remove('show');
+            }
+        });
+
+        // Grade selector functionality
+        document.querySelectorAll('.grade-button').forEach(button => {
+            button.addEventListener('click', function() {
+                currentGrade = this.dataset.grade;
+                
+                // Update active button
+                document.querySelectorAll('.grade-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Redisplay stats with new grade level
+                displayStats(currentData);
+            });
+        });
+
+        // Outperformers expand/collapse functionality
+        const outperformersHeader = document.getElementById('outperformersHeader');
+        const outperformersContent = document.getElementById('outperformersContent');
+        const expandIcon = document.getElementById('expandIcon');
+        
+        outperformersHeader.addEventListener('click', function() {
+            outperformersContent.classList.toggle('expanded');
+            expandIcon.classList.toggle('expanded');
+        });
+        
+        // Populate outperformers lists
+        function populateOutperformers() {
+            const elaOutperformers = [];
+            const mathOutperformers = [];
+            const scienceOutperformers = [];
+            
+            educationData.forEach(record => {
+                if (record.Level !== 'School') return;
+                
+                const displayName = record.SearchName === 'Statewide' ? null : record.SearchName;
+                if (!displayName) return;
+                
+                const elaOverall = parseFloat(record['% ELA Proficiency']);
+                const elaEL = parseFloat(record['% ELA Proficiency - EL']);
+                if (!isNaN(elaOverall) && !isNaN(elaEL) && elaEL > elaOverall) {
+                    elaOutperformers.push({
+                        name: displayName,
+                        overall: elaOverall,
+                        el: elaEL,
+                        gap: elaOverall - elaEL
+                    });
+                }
+                
+                const mathOverall = parseFloat(record['% Math Proficiency']);
+                const mathEL = parseFloat(record['% Math Proficiency - EL']);
+                if (!isNaN(mathOverall) && !isNaN(mathEL) && mathEL > mathOverall) {
+                    mathOutperformers.push({
+                        name: displayName,
+                        overall: mathOverall,
+                        el: mathEL,
+                        gap: mathOverall - mathEL
+                    });
+                }
+                
+                const scienceOverall = parseFloat(record['% Science Proficiency']);
+                const scienceEL = parseFloat(record['% Science Proficiency - EL']);
+                if (!isNaN(scienceOverall) && !isNaN(scienceEL) && scienceEL > scienceOverall) {
+                    scienceOutperformers.push({
+                        name: displayName,
+                        overall: scienceOverall,
+                        el: scienceEL,
+                        gap: scienceOverall - scienceEL
+                    });
+                }
+            });
+            
+            elaOutperformers.sort((a, b) => a.gap - b.gap);
+            mathOutperformers.sort((a, b) => a.gap - b.gap);
+            scienceOutperformers.sort((a, b) => a.gap - b.gap);
+            
+            const elaList = document.getElementById('elaList');
+            const mathList = document.getElementById('mathList');
+            const scienceList = document.getElementById('scienceList');
+            
+            elaList.innerHTML = elaOutperformers.map(item => `
+                <li class="outperformers-item">
+                    <div class="outperformers-item-name">${item.name}</div>
+                    <div class="outperformers-item-stats">
+                        Overall: ${item.overall.toFixed(1)}% | English Learners: ${item.el.toFixed(1)}% | Gap: ${item.gap.toFixed(1)} points
+                    </div>
+                </li>
+            `).join('');
+            
+            mathList.innerHTML = mathOutperformers.map(item => `
+                <li class="outperformers-item">
+                    <div class="outperformers-item-name">${item.name}</div>
+                    <div class="outperformers-item-stats">
+                        Overall: ${item.overall.toFixed(1)}% | English Learners: ${item.el.toFixed(1)}% | Gap: ${item.gap.toFixed(1)} points
+                    </div>
+                </li>
+            `).join('');
+            
+            scienceList.innerHTML = scienceOutperformers.map(item => `
+                <li class="outperformers-item">
+                    <div class="outperformers-item-name">${item.name}</div>
+                    <div class="outperformers-item-stats">
+                        Overall: ${item.overall.toFixed(1)}% | English Learners: ${item.el.toFixed(1)}% | Gap: ${item.gap.toFixed(1)} points
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // Initialize
+        loadData(); // This will also call populateOutperformers() after data loads
+    </script>
+</body>
+</html>
