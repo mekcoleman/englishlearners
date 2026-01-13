@@ -625,12 +625,12 @@
         let currentData = null;
         let currentGrade = 'all';
             
-            // Load data from external JSON file
+            // Load data from external JSON file - using raw GitHub URL
             const timestamp = new Date().getTime();
-            fetch(`https://mekcoleman.github.io/englishlearners/education_data.json?v=${timestamp}`)
+            fetch(`https://raw.githubusercontent.com/mekcoleman/englishlearners/main/education_data.json?v=${timestamp}`)
                 .then(response => {
                     console.log('Fetch response status:', response.status);
-                    console.log('Fetch response headers:', response.headers.get('content-type'));
+                    console.log('Fetch response URL:', response.url);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
@@ -646,7 +646,7 @@
                 })
                 .catch(error => {
                     console.error('Error loading data:', error);
-                    document.getElementById('statsGrid').innerHTML = '<div style="padding: 2rem; text-align: center; color: red;"><strong>Error loading data.</strong><br>Please wait a few minutes for GitHub Pages to deploy the data file, then refresh the page.</div>';
+                    document.getElementById('statsGrid').innerHTML = '<div style="padding: 2rem; text-align: center; color: red;"><strong>Error loading data.</strong><br>Error: ' + error.message + '</div>';
                 });
 
 
@@ -1220,8 +1220,7 @@
         }
 
         // Initialize
-        loadData();
-        populateOutperformers();
+        // Data loading and initialization happens in the fetch() call above
         
         // Auto-resize iframe based on content
         function sendHeight() {
