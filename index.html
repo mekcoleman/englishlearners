@@ -680,6 +680,7 @@
             const elEnrollment = data['# Student Enrollment - EL'];
             const elPercent = data['% Student Enrollment - EL'];
             const formerELPercent = data['% Student Enrollment - Former EL'];
+            const neverELPercent = data['% Student Enrollment - Never EL'];
             
             // Debug logging
             console.log('Former EL Debug:', {
@@ -760,26 +761,54 @@
                 `;
             }
             
-            // Former EL Percent
-            if (!formerELPercent || formerELPercent === '*' || formerELPercent === '') {
-                demographicsHTML += `
-                    <div class="demographic-item">
-                        <div class="demographic-label">Former English Learner Percentage</div>
-                        <div class="demographic-value redacted">Data redacted</div>
-                    </div>
-                `;
+            // Check if both EL and Former EL are redacted
+            const elRedacted = !elPercent || elPercent === '*' || elPercent === '';
+            const formerELRedacted = !formerELPercent || formerELPercent === '*' || formerELPercent === '';
+            
+            if (elRedacted && formerELRedacted) {
+                // Show Never EL instead
+                if (!neverELPercent || neverELPercent === '*' || neverELPercent === '') {
+                    demographicsHTML += `
+                        <div class="demographic-item">
+                            <div class="demographic-label">Never English Learner Percentage</div>
+                            <div class="demographic-value redacted">Data redacted</div>
+                        </div>
+                    `;
+                } else {
+                    const neverPercentNum = parseFloat(neverELPercent);
+                    const neverPercentFormatted = neverPercentNum.toLocaleString('en-US', {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    });
+                    demographicsHTML += `
+                        <div class="demographic-item">
+                            <div class="demographic-label">Never English Learner Percentage</div>
+                            <div class="demographic-value">${neverPercentFormatted}%</div>
+                        </div>
+                    `;
+                }
             } else {
-                const formerPercentNum = parseFloat(formerELPercent);
-                const formerPercentFormatted = formerPercentNum.toLocaleString('en-US', {
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1
-                });
-                demographicsHTML += `
-                    <div class="demographic-item">
-                        <div class="demographic-label">Former English Learner Percentage</div>
-                        <div class="demographic-value">${formerPercentFormatted}%</div>
-                    </div>
-                `;
+                // Show Former EL as normal
+                if (!formerELPercent || formerELPercent === '*' || formerELPercent === '') {
+                    demographicsHTML += `
+                        <div class="demographic-item">
+                            <div class="demographic-label">Former English Learner Percentage</div>
+                            <div class="demographic-value redacted">Data redacted</div>
+                        </div>
+                    `;
+                } else {
+                    const formerPercentNum = parseFloat(formerELPercent);
+                    const formerPercentFormatted = formerPercentNum.toLocaleString('en-US', {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1
+                    });
+                    demographicsHTML += `
+                        <div class="demographic-item">
+                            <div class="demographic-label">Former English Learner Percentage</div>
+                            <div class="demographic-value">${formerPercentFormatted}%</div>
+                        </div>
+                    `;
+                }
             }
             
             demographicsGrid.innerHTML = demographicsHTML;
@@ -938,49 +967,24 @@
             let elBar = '';
             let gapIndicator = '';
             
-            if (overallFormatted === '*' || elFormatted === '*' || overallFormatted === null || elFormatted === null) {
-                const redactedText = (overallFormatted === '*' || elFormatted === '*') 
-                    ? '<span class="redacted">Data redacted for privacy</span>' 
-                    : '<span class="redacted">No data available</span>';
-                
+            // Check each value independently
+            const overallRedacted = overallFormatted === '*' || overallFormatted === null;
+            const elRedacted = elFormatted === '*' || elFormatted === null;
+            
+            // Overall Students bar
+            if (overallRedacted) {
                 overallBar = `
                     <div class="bar-group">
                         <div class="bar-label">Overall Students</div>
                         <div class="bar-container">
-                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;">${redactedText}</div>
-                        </div>
-                    </div>
-                `;
-                elBar = `
-                    <div class="bar-group">
-                        <div class="bar-label">English Learners</div>
-                        <div class="bar-container">
-                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;">${redactedText}</div>
+                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;"><span class="redacted">Data redacted for privacy</span></div>
                         </div>
                     </div>
                 `;
             } else {
                 const overallNum = parseFloat(overallValue);
-                const elNum = parseFloat(elValue);
-                const gap = overallNum - elNum;
-                const gapClass = gap < 0 ? 'surplus' : '';
-                
-                // Use custom label if provided, otherwise use default proficiency gap/surplus logic
-                let gapLabel;
-                if (customLabel) {
-                    gapLabel = customLabel;
-                } else {
-                    gapLabel = gap < 0 ? 'Proficiency Surplus:' : 'Proficiency Gap:';
-                }
-                
-                const displayGap = Math.abs(gap);
-                
-                // For small bars (less than 15%), show percentage outside the bar in black
                 const overallValueInside = overallNum >= 15 ? `${overallFormatted}%` : '';
                 const overallValueOutside = overallNum < 15 ? `<span class="bar-value-outside">${overallFormatted}%</span>` : '';
-                
-                const elValueInside = elNum >= 15 ? `${elFormatted}%` : '';
-                const elValueOutside = elNum < 15 ? `<span class="bar-value-outside">${elFormatted}%</span>` : '';
                 
                 overallBar = `
                     <div class="bar-group">
@@ -993,6 +997,22 @@
                         </div>
                     </div>
                 `;
+            }
+            
+            // English Learners bar
+            if (elRedacted) {
+                elBar = `
+                    <div class="bar-group">
+                        <div class="bar-label">English Learners</div>
+                        <div class="bar-container">
+                            <div style="padding: 0.875rem; text-align: center; font-size: 0.85rem;"><span class="redacted">Data redacted for privacy</span></div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const elNum = parseFloat(elValue);
+                const elValueInside = elNum >= 15 ? `${elFormatted}%` : '';
+                const elValueOutside = elNum < 15 ? `<span class="bar-value-outside">${elFormatted}%</span>` : '';
                 
                 elBar = `
                     <div class="bar-group">
@@ -1005,11 +1025,34 @@
                         </div>
                     </div>
                 `;
+            }
+            
+            // Gap indicator - only show if both values are available
+            if (!overallRedacted && !elRedacted) {
+                const overallNum = parseFloat(overallValue);
+                const elNum = parseFloat(elValue);
+                const gap = overallNum - elNum;
+                const gapClass = gap < 0 ? 'surplus' : '';
+                
+                let gapLabel;
+                if (customLabel) {
+                    gapLabel = customLabel;
+                } else {
+                    gapLabel = gap < 0 ? 'Proficiency Surplus:' : 'Proficiency Gap:';
+                }
+                
+                const displayGap = Math.abs(gap);
                 
                 gapIndicator = `
                     <div class="gap-indicator">
                         <span class="gap-label">${gapLabel}</span>
                         <span class="gap-value ${gapClass}">${formatNumber(displayGap)} percentage points</span>
+                    </div>
+                `;
+            } else if (overallRedacted || elRedacted) {
+                gapIndicator = `
+                    <div class="gap-indicator">
+                        <span class="gap-label" style="color: var(--text-muted); font-style: italic;">Gap cannot be calculated due to redacted data</span>
                     </div>
                 `;
             }
