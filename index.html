@@ -957,6 +957,27 @@
             }
             
             statsGrid.innerHTML = statsHTML;
+            
+            // Check if grade-level data differs from overall data
+            const hasGradeLevelData = subjects.some(subject => {
+                const allGrades = subject.overall['all'];
+                const grades38 = subject.overall['grades-3-8'];
+                const highSchool = subject.overall['high-school'];
+                
+                // Check if any grade-level data exists and differs from overall
+                return (grades38 && grades38 !== '' && grades38 !== '*' && grades38 !== allGrades) ||
+                       (highSchool && highSchool !== '' && highSchool !== '*' && highSchool !== allGrades);
+            });
+            
+            // Show/hide grade selector based on whether grade-level data exists
+            const gradeSelector = document.querySelector('.grade-selector-wrapper');
+            if (gradeSelector) {
+                if (hasGradeLevelData) {
+                    gradeSelector.style.display = 'block';
+                } else {
+                    gradeSelector.style.display = 'none';
+                }
+            }
         }
         
         function generateBars(overallValue, elValue, customLabel) {
